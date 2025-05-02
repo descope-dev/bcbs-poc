@@ -11,24 +11,18 @@ export class LoginComponent implements OnInit {
   descopeProjectId!: string;
   descopeBaseURL!: string;
 
-  constructor(
-    private elRef: ElementRef,
-    private renderer: Renderer2,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.descopeProjectId = environment.descopeProjectId;
-    this.descopeBaseURL = environment.baseURL;
   }
 
-  onSuccess(e: CustomEvent) {
-		console.log('SUCCESSFULLY LOGGED IN', e.detail);
+  onLoginSuccess(): void {
+    // Redirect to dashboard after successful login
     this.router.navigate(['/dashboard']);
+  }
 
-	}
-
-	onError(e: CustomEvent) {
-		console.log('ERROR FROM LOG IN FLOW', e.detail);
-	}
+  onError(e: CustomEvent) {
+    console.log('ERROR FROM LOG IN FLOW', e.detail);
+  }
 }

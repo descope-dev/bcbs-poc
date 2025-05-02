@@ -3,7 +3,7 @@ import Descope from '@descope/web-js-sdk';
 import { environment } from '../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OneTapService {
   private sdk: any;
@@ -11,7 +11,11 @@ export class OneTapService {
 
   constructor() {
     const projectId = environment.descopeProjectId;
-    this.sdk = Descope({ projectId: projectId, persistTokens: true, autoRefresh: true });
+    this.sdk = Descope({
+      projectId: projectId,
+      persistTokens: true,
+      autoRefresh: true,
+    });
   }
 
   // Method to display Google One Tap
@@ -20,12 +24,12 @@ export class OneTapService {
 
     try {
       const resp = await this.sdk.fedcm.oneTap('google');
-      console.log("One Tap response:", resp);
+      console.log('One Tap response:', resp);
       // Redirect on success
-      window.location.replace("/dashboard");
+      window.location.replace('/dashboard');
       this.oneTapInitialized = true;
     } catch (error) {
-      console.error("Failed to display One Tap:", error);
+      console.error('Failed to display One Tap:', error);
     }
   }
 

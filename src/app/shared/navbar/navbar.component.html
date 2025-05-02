@@ -1,0 +1,84 @@
+<header class="bg-white shadow-sm">
+  <div class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Left side with logo and title -->
+      <div class="flex items-center space-x-4">
+        <img
+          src="assets/images/bcbs-logo.svg"
+          alt="Blue Shield of California Logo"
+          class="h-8"
+        />
+        <h1 class="text-xl font-bold text-[#0071bc]">Member Portal</h1>
+      </div>
+
+      <!-- Right side with navigation -->
+      <nav class="flex items-center space-x-8">
+        <a
+          *ngIf="showDashboardLink"
+          routerLink="/dashboard"
+          class="text-[#0071bc] hover:text-[#005a94] font-medium"
+        >
+          Dashboard
+        </a>
+        <a
+          *ngIf="showApplicationsLink"
+          routerLink="/applications"
+          class="text-[#0071bc] hover:text-[#005a94] font-medium"
+        >
+          Applications
+        </a>
+        <a
+          *ngIf="showAdminLink"
+          routerLink="/admin"
+          class="text-[#0071bc] hover:text-[#005a94] font-medium"
+        >
+          Admin
+        </a>
+
+        <!-- User Dropdown -->
+        <div class="relative" #userDropdown *ngIf="showUserDropdown">
+          <button
+            (click)="toggleDropdown()"
+            class="flex items-center text-[#0071bc] hover:text-[#005a94] space-x-2 focus:outline-none"
+          >
+            <span class="font-medium">{{ user?.name || "Member" }}</span>
+            <svg
+              class="h-5 w-5 transition-transform duration-200"
+              [class.rotate-180]="isDropdownOpen"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div
+            *ngIf="isDropdownOpen"
+            class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 z-50"
+            (clickOutside)="closeDropdown()"
+          >
+            <a
+              routerLink="/profile"
+              class="block px-4 py-2 text-gray-800 hover:bg-blue-50"
+            >
+              Edit Profile
+            </a>
+            <button
+              (click)="logout()"
+              class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-blue-50"
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>

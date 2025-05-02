@@ -4,43 +4,120 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Tailwind Login</title>
-    <meta name="author" content="David Grzyb" />
+    <title>Blue Shield of California - Member Login</title>
     <meta name="description" content="" />
-
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
       rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
-      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
     />
     <style>
-      .body-bg {
-        background-color: #9921e8;
-        background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
+      @import url("https://fonts.googleapis.com/css2?family=Fieldwork:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+      body {
+        font-family: "Fieldwork", sans-serif;
       }
     </style>
   </head>
+
   <body
-    class="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0"
-    style="font-family: 'Lato', sans-serif"
+    class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-white"
   >
-    <header class="max-w-lg mx-auto">
-      <a href="#">
-        <h1 class="text-4xl font-bold text-white text-center">
-          Angular Sample App
+    <div class="min-h-screen">
+      <!-- Header -->
+      <app-navbar></app-navbar>
+
+      <!-- Main Content -->
+      <main class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold text-center text-[#0071bc] mb-8">
+          Member Login and Registration
         </h1>
-      </a>
-    </header>
-    <div style="max-width: 1000px; margin: 0 auto; place-items: center;">
-      <descope
-        flowId="sign-up-or-in"
-      (success)="onSuccess($event)"
-      (error)="onError($event)"
-      theme="os"
-      ></descope>
+
+        <div class="max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Member Login Section -->
+            <div class="bg-white p-8 rounded-lg border border-gray-200">
+              <h2 class="text-2xl font-bold text-[#0071bc] mb-6">
+                Member login
+              </h2>
+
+              <!-- Descope Login Widget -->
+              <div class="mb-6">
+                <descope
+                  flowId="sign-up-or-in"
+                  (success)="onLoginSuccess()"
+                ></descope>
+              </div>
+            </div>
+
+            <!-- Registration Section -->
+            <div class="bg-white p-8 rounded-lg border border-gray-200">
+              <h2 class="text-2xl font-bold text-[#0071bc] mb-6">
+                Register with us online
+              </h2>
+              <p class="text-gray-600 mb-6">
+                Registration allows Blue Shield of CA members to quickly find
+                doctors, view claims, pay bills, and more.
+              </p>
+              <div class="bg-[#b3f8ff80] p-6 rounded-md mb-6">
+                <p class="text-gray-700 font-medium mb-3">
+                  To start, you'll need either your:
+                </p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                  <li>
+                    Member ID (especially for Blue Shield Medicare members)
+                  </li>
+                  <li>Social security number (SSN)</li>
+                </ul>
+              </div>
+              <div class="space-y-4">
+                <a
+                  routerLink="/register"
+                  class="block w-full bg-[#0071bc] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005a94] transition-colors text-center shadow-md"
+                >
+                  Get started
+                </a>
+                <p class="text-sm text-gray-600 text-center">
+                  <a href="#" class="text-[#0071bc] hover:text-[#005a94]">
+                    Contact us
+                  </a>
+                  if you haven't received your Member ID card
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-gray-50 border-t border-gray-200 py-8 mt-12">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+              <img
+                src="assets/images/bcbs-logo.svg"
+                alt="Blue Shield of California Logo"
+                class="h-8"
+              />
+            </div>
+            <div class="flex space-x-6">
+              <a href="#" class="text-[#0071bc] hover:text-[#005a94]"
+                >Privacy Policy</a
+              >
+              <a href="#" class="text-[#0071bc] hover:text-[#005a94]"
+                >Terms of Use</a
+              >
+              <a href="#" class="text-[#0071bc] hover:text-[#005a94]"
+                >Contact Us</a
+              >
+            </div>
+          </div>
+          <div class="mt-8 text-center text-gray-500 text-sm">
+            © 2024 Blue Shield of California. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   </body>
 </html>

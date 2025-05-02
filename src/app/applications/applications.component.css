@@ -1,0 +1,123 @@
+/* Custom styles for applications page */
+.bg-blue-900 {
+  background-color: #003087; /* BCBS Blue */
+}
+
+.text-blue-900 {
+  color: #003087;
+}
+
+.bg-blue-50 {
+  background-color: #f0f7ff;
+}
+
+/* Widget container styling */
+.applications-container {
+  position: relative;
+  min-height: 400px;
+  overflow: visible;
+}
+
+:host ::ng-deep applications-portal {
+  display: block;
+  width: 100%;
+  min-height: 400px;
+}
+
+/* Fix Descope widget styling */
+:host ::ng-deep .descope-application {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+:host ::ng-deep .descope-application:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+:host ::ng-deep .descope-application-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #003087;
+}
+
+:host ::ng-deep .descope-application-description {
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin-top: 0.5rem;
+}
+
+:host ::ng-deep .descope-button {
+  background-color: #003087 !important;
+  color: white !important;
+  border-radius: 0.375rem !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  transition: background-color 0.2s !important;
+}
+
+:host ::ng-deep .descope-button:hover {
+  background-color: #002366 !important;
+}
+
+/* Navigation dropdown styling */
+.group:hover .group-hover\:block {
+  display: block;
+}
+
+/* Input focus styles */
+.focus\:ring-blue-500:focus {
+  --tw-ring-color: #003087;
+  box-shadow: 0 0 0 1px rgba(0, 48, 135, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .grid {
+    gap: 1rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  nav a {
+    font-size: 0.875rem;
+  }
+}
+
+/* Smooth transitions */
+.transition-shadow {
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+/* Custom scrollbar for widgets */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #003087;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #002366;
+}

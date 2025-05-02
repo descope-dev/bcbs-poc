@@ -1,0 +1,94 @@
+/* Custom styles for profile page */
+.bg-blue-900 {
+  background-color: #003087; /* BCBS Blue */
+}
+
+.text-blue-900 {
+  color: #003087;
+}
+
+.bg-blue-100 {
+  background-color: #e6f0ff;
+}
+
+/* Widget container styling */
+.user-profile-container {
+  position: relative;
+  min-height: 400px;
+  overflow: visible;
+}
+
+:host ::ng-deep user-profile {
+  display: block;
+  width: 100%;
+  min-height: 400px;
+}
+
+/* Fix Descope widget styling */
+:host ::ng-deep form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+:host ::ng-deep input,
+:host ::ng-deep select {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  width: 100%;
+}
+
+:host ::ng-deep button {
+  background-color: #003087;
+  color: white;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+:host ::ng-deep button:hover {
+  background-color: #002366;
+}
+
+/* Navigation dropdown styling */
+.group:hover .group-hover\:block {
+  display: block;
+}
+
+/* Form control focus */
+.focus\:ring-blue-500:focus {
+  --tw-ring-color: #003087;
+  box-shadow: 0 0 0 1px rgba(0, 48, 135, 0.2);
+}
+
+/* Improve form accessibility */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #003087;
+}
+
+/* Button hover states */
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  nav a {
+    font-size: 0.875rem;
+  }
+}

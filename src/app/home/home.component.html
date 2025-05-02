@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Angular Sample App Home</title>
+    <title>BCBS Member Portal</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    <meta name="author" content="" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -195,79 +196,145 @@
   </head>
 
   <body
-    class="leading-normal tracking-normal text-gray-900"
-    style="font-family: 'Source Sans Pro', sans-serif"
+    class="font-sans antialiased text-gray-900 leading-normal tracking-wider"
   >
+    <!-- Hero Section -->
     <div
-      class="h-screen pb-14 bg-right bg-cover"
-      style="background-image: url('bg.svg')"
+      class="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white min-h-screen"
     >
-      <!--Nav-->
-      <div class="w-full container mx-auto p-6">
-        <div class="w-full flex items-center justify-between">
-          <a
-            class="flex items-center text-indigo-400 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-            href="#"
-          >
-          </a>
+      <!-- Background Image -->
+      <div
+        class="absolute inset-0 bg-cover bg-center opacity-20"
+        style="background-image: url('assets/images/healthcare-bg.jpg')"
+      ></div>
 
-          <div>
+      <div class="container mx-auto px-4 py-24 relative">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold mb-6">
+            Welcome to Your BCBS Member Portal
+          </h1>
+          <p class="text-xl mb-12 text-blue-100 max-w-2xl mx-auto">
+            Your secure, easy-to-use portal for managing healthcare benefits and
+            accessing care
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              *ngIf="user"
-              class="inline-block bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-center h-10 md:h-auto md:p-4"
-              [routerLink]="['/dashboard']"
+              routerLink="/login"
+              class="bg-white text-blue-900 px-8 py-4 rounded-md font-medium hover:bg-blue-50 transition-colors text-center text-lg"
             >
-              Dashboard
-            </a>
-
-            <a
-              *ngIf="!user"
-              class="inline-block bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-center h-10 md:h-auto md:p-4"
-              [routerLink]="['/login']"
-            >
-              Login
+              Sign In / Register
             </a>
           </div>
         </div>
       </div>
+    </div>
 
-      <!--Main-->
-      <div
-        class="container pt-24 md:pt-48 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center"
-      >
-        <!--Left Col-->
-        <div
-          class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden"
-        >
-          <h1
-            class="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1"
-          >
-            Angular + Descope Sample App
-          </h1>
-          <p
-            class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle"
-          >
-            Powered by our Web.js SDK
-          </p>
-        </div>
+    <!-- Features Section -->
+    <div class="py-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-center text-blue-900 mb-16">
+            Simple, Secure Access to Your Healthcare
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Feature 1 -->
+            <div class="text-center">
+              <div
+                class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <img
+                  src="assets/images/icon-coverage.png"
+                  alt="Coverage Icon"
+                  class="w-10 h-10"
+                />
+              </div>
+              <h3 class="text-xl font-bold text-blue-900 mb-4">
+                Manage Coverage
+              </h3>
+              <p class="text-gray-600">
+                View and manage your health insurance coverage and benefits
+              </p>
+            </div>
 
-        <!--Right Col-->
-        <div class="w-full xl:w-3/5 py-6 overflow-y-hidden">
-          <a href="https://angular.io/" target="_blank">
-            <img
-              class="w-1/3 mx-auto mt-4 lg:mr-0 slide-in-bottom"
-              src="../assets/images/angular.svg"
-            />
-          </a>
-        </div>
+            <!-- Feature 2 -->
+            <div class="text-center">
+              <div
+                class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <img
+                  src="assets/images/icon-find-care.png"
+                  alt="Find Care Icon"
+                  class="w-10 h-10"
+                />
+              </div>
+              <h3 class="text-xl font-bold text-blue-900 mb-4">Find Care</h3>
+              <p class="text-gray-600">
+                Easily locate doctors, hospitals, and pharmacies in your network
+              </p>
+            </div>
 
-        <!--Footer-->
-        <div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
-          <a class="text-gray-500 no-underline hover:no-underline" href="#"
-            >&copy; Descope 2023</a
-          >
+            <!-- Feature 3 -->
+            <div class="text-center">
+              <div
+                class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <img
+                  src="assets/images/icon-support.png"
+                  alt="Support Icon"
+                  class="w-10 h-10"
+                />
+              </div>
+              <h3 class="text-xl font-bold text-blue-900 mb-4">24/7 Support</h3>
+              <p class="text-gray-600">
+                Get help and answers to your questions anytime, anywhere
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- CTA Section -->
+    <div class="bg-blue-900 text-white py-24">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-6">Ready to Get Started?</h2>
+          <p class="text-xl mb-8 text-blue-100">
+            Join millions of members who trust BCBS for their healthcare needs
+          </p>
+          <a
+            routerLink="/login"
+            class="inline-block bg-white text-blue-900 px-8 py-4 rounded-md font-medium hover:bg-blue-50 transition-colors text-lg"
+          >
+            Register Now
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-6 md:mb-0">
+            <img
+              src="assets/images/bcbs-logo.svg"
+              alt="BCBS Logo"
+              class="h-8"
+            />
+          </div>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-white"
+              >Privacy Policy</a
+            >
+            <a href="#" class="text-gray-400 hover:text-white">Terms of Use</a>
+            <a href="#" class="text-gray-400 hover:text-white">Contact Us</a>
+          </div>
+        </div>
+        <div class="mt-8 text-center text-gray-400 text-sm">
+          © 2024 Blue Cross Blue Shield. All rights reserved.
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

@@ -11,14 +11,15 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css'],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class AdminComponent implements OnInit, OnDestroy {
   user: any = null;
   isLoading = true;
   isDropdownOpen = false;
+  selectedSection: 'users' | 'org' | 'permissions' | 'audit' = 'users';
   private subscriptions: Subscription[] = [];
 
   @ViewChild('userDropdown') userDropdown!: ElementRef;
@@ -46,9 +47,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
             descopeUser.user.name ||
             descopeUser.user.email?.split('@')[0] ||
             'Member',
-          email: descopeUser.user.email,
-          phone: descopeUser.user.phone,
-          memberId: descopeUser.user.customAttributes?.['memberId'],
+          email: descopeUser.user.email || 'Loading...',
+          phone: descopeUser.user.phone || 'Loading...',
+          memberId: descopeUser.user.userId || 'Loading...',
           isAdmin: true, // For admin component, we'll assume admin access
         };
         this.isLoading = false;
@@ -77,12 +78,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subscriptions.push(sessionSub, userSub);
   }
 
+  selectSection(section: 'users' | 'org' | 'permissions' | 'audit'): void {
+    this.selectedSection = section;
+  }
+
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   closeDropdown(): void {
     this.isDropdownOpen = false;
+  }
+
+  onSSOConfigSuccess() {
+    // Handle successful SSO configuration
+    console.log('SSO configuration completed successfully');
+    // You can add additional logic here, such as showing a success message
+    // or refreshing the page to show updated settings
   }
 
   logout(): void {

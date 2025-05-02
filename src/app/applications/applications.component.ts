@@ -11,11 +11,11 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-applications',
+  templateUrl: './applications.component.html',
+  styleUrls: ['./applications.component.css'],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class ApplicationsComponent implements OnInit, OnDestroy {
   user: any = null;
   isLoading = true;
   isDropdownOpen = false;
@@ -49,18 +49,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
           email: descopeUser.user.email,
           phone: descopeUser.user.phone,
           memberId: descopeUser.user.customAttributes?.['memberId'],
-          isAdmin: true, // For admin component, we'll assume admin access
+          isAdmin: true,
         };
         this.isLoading = false;
       } else {
-        // Fallback to auth service if needed
         this.authService
           .getUserData()
           .then((authUser) => {
             if (authUser) {
               this.user = {
                 ...authUser,
-                isAdmin: true, // Force admin access for admin component
+                isAdmin: true,
               };
             } else {
               this.router.navigate(['/']);
