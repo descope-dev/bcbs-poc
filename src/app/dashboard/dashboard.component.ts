@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 export class DashboardComponent implements OnInit {
   user: any = null;
   isDropdownOpen = false;
+  isAdminDropdownOpen = false;
 
   constructor(private authService: AuthService) {}
 
@@ -27,6 +28,18 @@ export class DashboardComponent implements OnInit {
 
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
+    // Close admin dropdown if open
+    if (this.isDropdownOpen && this.isAdminDropdownOpen) {
+      this.isAdminDropdownOpen = false;
+    }
+  }
+
+  toggleAdminDropdown(): void {
+    this.isAdminDropdownOpen = !this.isAdminDropdownOpen;
+    // Close user dropdown if open
+    if (this.isAdminDropdownOpen && this.isDropdownOpen) {
+      this.isDropdownOpen = false;
+    }
   }
 
   logout(): void {

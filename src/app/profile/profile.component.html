@@ -23,13 +23,60 @@
         >
           Applications
         </a>
-        <a
-          *ngIf="user?.isAdmin"
-          routerLink="/admin"
-          class="text-blue-900 hover:text-blue-700 font-medium"
-        >
-          Admin
-        </a>
+        <!-- Admin Dropdown -->
+        <div class="relative" *ngIf="user?.isAdmin">
+          <button
+            (click)="toggleAdminDropdown()"
+            class="flex items-center text-blue-900 hover:text-blue-700 font-medium"
+          >
+            <span class="mr-1">Admin</span>
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <div
+            *ngIf="isAdminDropdownOpen"
+            class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10"
+          >
+            <a
+              routerLink="/admin"
+              class="block px-4 py-2 text-gray-800 hover:bg-blue-50"
+            >
+              Admin Dashboard
+            </a>
+            <a
+              routerLink="/admin"
+              [queryParams]="{ section: 'users' }"
+              class="block px-4 py-2 text-gray-800 hover:bg-blue-50"
+            >
+              User Management
+            </a>
+            <a
+              routerLink="/admin"
+              [queryParams]="{ section: 'permissions' }"
+              class="block px-4 py-2 text-gray-800 hover:bg-blue-50"
+            >
+              Role Management
+            </a>
+            <a
+              routerLink="/admin"
+              [queryParams]="{ section: 'audit' }"
+              class="block px-4 py-2 text-gray-800 hover:bg-blue-50"
+            >
+              Audit Logs
+            </a>
+          </div>
+        </div>
         <span class="text-gray-600">{{ user?.name }}</span>
         <button
           class="bg-blue-900 text-white hover:bg-blue-800 font-bold py-2 px-4 rounded"

@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
 })
 export class ProfileComponent implements OnInit {
   user: any = null;
+  isAdminDropdownOpen = false;
 
   constructor(private authService: AuthService) {}
 
@@ -37,6 +38,10 @@ export class ProfileComponent implements OnInit {
         console.error('Error fetching user data in profile component:', error);
         // Continue with default user data
       });
+  }
+
+  toggleAdminDropdown(): void {
+    this.isAdminDropdownOpen = !this.isAdminDropdownOpen;
   }
 
   logout(): void {
