@@ -25,6 +25,39 @@ export class AuthService {
     private router: Router
   ) {}
 
+  async isAuthenticated(): Promise<boolean> {
+    try {
+      const sessionToken = this.descopeAuthService.getSessionToken();
+      if (!sessionToken) {
+        return false;
+      }
+      return !this.descopeAuthService.descopeSdk.isJwtExpired(sessionToken);
+    } catch (error) {
+      console.error('Error checking authentication status:', error);
+      return false;
+    }
+  }
+
+  async loginWithIDP(): Promise<void> {
+    try {
+      // For SSO authentication, we'll use the enterprise SSO flow
+      // This will redirect the user to their organization's login page
+      // We'll use the raw Descope object for this to access native SDK features
+      const flow = Descope.siwa();
+
+      // Set the redirect URL to return to the dashboard after login
+      flow.start({
+        redirectUrl: window.location.origin + '/dashboard',
+      });
+
+      // Note: The above will redirect the browser so execution
+      // won't continue beyond this point
+    } catch (error) {
+      console.error('IDP login error:', error);
+      throw error;
+    }
+  }
+
   async getUserData(): Promise<User> {
     try {
       // Get the current user from the Descope SDK
