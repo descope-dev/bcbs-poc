@@ -12,41 +12,28 @@
 }
 
 /* Widget container styling */
-.user-management-container {
-  position: relative;
-  min-height: 600px;
-  overflow: visible;
-}
-
 :host ::ng-deep user-management {
   display: block;
-  width: 100%;
   min-height: 600px;
-}
-
-/* Navigation dropdown styling */
-.group:hover .group-hover\:block {
-  display: block;
 }
 
 /* Table styling improvements */
 :host ::ng-deep table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.875rem;
 }
 
 :host ::ng-deep th {
   background-color: #f8fafc;
   text-align: left;
-  padding: 0.75rem;
+  padding: 12px;
   font-weight: 600;
   color: #4a5568;
   border-bottom: 1px solid #e2e8f0;
 }
 
 :host ::ng-deep td {
-  padding: 0.75rem;
+  padding: 12px;
   border-bottom: 1px solid #e2e8f0;
 }
 
@@ -59,44 +46,20 @@
   transition: all 0.2s;
 }
 
-/* Fix Descope widget styling */
-:host ::ng-deep input,
-:host ::ng-deep select {
-  border: 1px solid #e2e8f0;
-  border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-}
-
-:host ::ng-deep .descope-button,
-:host ::ng-deep button[type="submit"] {
-  background-color: #003087 !important;
-  color: white !important;
-  border-radius: 0.375rem !important;
-  padding: 0.5rem 1rem !important;
-  font-weight: 500 !important;
-  transition: background-color 0.2s !important;
-}
-
-:host ::ng-deep .descope-button:hover,
-:host ::ng-deep button[type="submit"]:hover {
-  background-color: #002366 !important;
-}
-
 /* Active menu item */
-a.bg-blue-50 {
+.bg-blue-50 {
   position: relative;
 }
 
-a.bg-blue-50::before {
+.bg-blue-50::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
+  width: 4px;
   background-color: #003087;
-  border-radius: 0 2px 2px 0;
+  border-radius: 0 4px 4px 0;
 }
 
 /* Responsive adjustments */
@@ -104,19 +67,5 @@ a.bg-blue-50::before {
   .lg\:col-span-1,
   .lg\:col-span-3 {
     grid-column: span 4 / span 4;
-  }
-
-  .sticky {
-    position: static;
-  }
-
-  nav {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  nav a {
-    font-size: 0.875rem;
   }
 }

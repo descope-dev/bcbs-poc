@@ -29,7 +29,6 @@ import { ApplicationsComponent } from './applications/applications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthService } from './auth.service';
-import { ClickOutsideDirective } from './click-outside.directive';
 
 export function initializeApp(authService: DescopeAuthService) {
   return () => zip([authService.refreshSession(), authService.refreshUser()]);
@@ -53,7 +52,6 @@ const routes: Routes = [
     ApplicationsComponent,
     ProfileComponent,
     AdminComponent,
-    ClickOutsideDirective,
   ],
   imports: [
     BrowserModule,

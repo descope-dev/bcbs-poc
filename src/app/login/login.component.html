@@ -12,13 +12,6 @@
       rel="stylesheet"
       href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
     />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Fieldwork:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
-
-      body {
-        font-family: "Fieldwork", sans-serif;
-      }
-    </style>
   </head>
 
   <body
@@ -26,11 +19,26 @@
   >
     <div class="min-h-screen">
       <!-- Header -->
-      <app-navbar></app-navbar>
+      <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <img
+                src="assets/images/bcbs-logo.svg"
+                alt="Blue Shield of California Logo"
+                class="h-8 mr-4"
+              />
+              <a href="/" class="text-blue-900 hover:text-blue-700 font-medium">
+                Blue Shield of California home
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
 
       <!-- Main Content -->
       <main class="container mx-auto px-4 py-12">
-        <h1 class="text-3xl font-bold text-center text-[#0071bc] mb-8">
+        <h1 class="text-3xl font-bold text-center text-blue-900 mb-8">
           Member Login and Registration
         </h1>
 
@@ -38,43 +46,69 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             <!-- Member Login Section -->
             <div class="bg-white p-8 rounded-lg border border-gray-200">
-              <h2 class="text-2xl font-bold text-[#0071bc] mb-6">
+              <h2 class="text-2xl font-bold text-blue-900 mb-6">
                 Member login
               </h2>
 
-              <!-- Descope Login Widget -->
+              <!-- Descope Login -->
               <div class="mb-6">
                 <descope
                   flowId="sign-up-or-in"
                   (success)="onLoginSuccess()"
+                  (error)="onError($event)"
                 ></descope>
+              </div>
+
+              <div class="mt-8 space-y-4">
+                <div class="flex justify-between items-center">
+                  <a
+                    href="#"
+                    class="text-[#0071bc] hover:text-[#005a94] font-medium"
+                  >
+                    Provider login
+                  </a>
+                  <a
+                    href="#"
+                    class="text-[#0071bc] hover:text-[#005a94] font-medium"
+                  >
+                    Employer login
+                  </a>
+                </div>
+                <div class="text-center">
+                  <a
+                    href="#"
+                    class="text-[#0071bc] hover:text-[#005a94] font-medium"
+                  >
+                    Broker login
+                  </a>
+                </div>
               </div>
             </div>
 
             <!-- Registration Section -->
             <div class="bg-white p-8 rounded-lg border border-gray-200">
-              <h2 class="text-2xl font-bold text-[#0071bc] mb-6">
+              <h2 class="text-2xl font-bold text-blue-900 mb-6">
                 Register with us online
               </h2>
-              <p class="text-gray-600 mb-6">
-                Registration allows Blue Shield of CA members to quickly find
-                doctors, view claims, pay bills, and more.
-              </p>
-              <div class="bg-[#b3f8ff80] p-6 rounded-md mb-6">
-                <p class="text-gray-700 font-medium mb-3">
+              <div class="highlight-section">
+                <p class="text-gray-600 mb-4">
                   To start, you'll need either your:
                 </p>
-                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <ul class="list-disc list-inside text-gray-600">
                   <li>
                     Member ID (especially for Blue Shield Medicare members)
                   </li>
                   <li>Social security number (SSN)</li>
                 </ul>
               </div>
+              <p class="text-gray-600 mb-6">
+                Registration allows Blue Shield of CA members to quickly find
+                doctors, view claims, pay bills, and more.
+              </p>
               <div class="space-y-4">
                 <a
                   routerLink="/register"
-                  class="block w-full bg-[#0071bc] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005a94] transition-colors text-center shadow-md"
+                  class="block w-full bg-[#0071bc] text-white px-6 py-3 rounded-md font-medium hover:bg-[#005a94] transition-colors text-center"
                 >
                   Get started
                 </a>

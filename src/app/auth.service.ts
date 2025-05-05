@@ -64,6 +64,7 @@ export class AuthService {
             'Error fetching profile, returning demo admin user',
             error
           );
+          return this.getDemoAdminUser();
         }
       } else {
         // Token is expired or doesn't exist, try to refresh
@@ -92,18 +93,36 @@ export class AuthService {
             'Session refresh failed, returning demo admin user',
             error
           );
+          return this.getDemoAdminUser();
         }
       }
     } catch (err) {
       console.error('getUserData error:', err);
+      return this.getDemoAdminUser();
     }
-    // Default return for all error cases
+  }
+
+  // Provide default user data for the demo - with admin access
+  private getDemoAdminUser(): User {
     return {
-      name: 'Demo User',
-      email: 'demo@descope.com',
+      name: 'BCBS Admin',
+      email: 'admin@bcbs.com',
       role: 'Admin',
       picture: '',
-      isAdmin: true,
+      isAdmin: true, // Always true for demo
+      memberId: 'ADMIN123',
+      phone: '(555) 123-4567',
+    };
+  }
+
+  // Standard member user (not used in demo, but kept for reference)
+  private getDefaultUser(): User {
+    return {
+      name: 'BCBS Member',
+      email: 'member@bcbs.com',
+      role: 'Member',
+      picture: '',
+      isAdmin: false,
       memberId: '123456789',
       phone: '(555) 123-4567',
     };

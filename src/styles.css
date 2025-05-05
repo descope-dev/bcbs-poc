@@ -1,3 +1,61 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@import url("https://fonts.googleapis.com/css2?family=Fieldwork:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+:root {
+  --font-fieldwork: "Fieldwork", sans-serif;
+}
+
+body {
+  font-family: var(--font-fieldwork);
+}
+
+/* Ensure buttons are visible */
+button {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Highlight section styling */
+.highlight-section {
+  background-color: #f0f7ff;
+  border-left: 4px solid #003087;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+/* Dropdown menu styling */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+/* Ensure dropdown is visible */
+.bg-white {
+  background-color: white !important;
+}
+
+/* Ensure dropdown items are visible */
+.block {
+  display: block !important;
+}
+
+/* Ensure dropdown is not hidden */
+.hidden {
+  display: none !important;
+}
+
+/* Ensure dropdown has proper shadow */
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}

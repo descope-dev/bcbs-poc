@@ -1,269 +1,140 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>BCBS Admin</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
-    />
-  </head>
-
-  <body
-    class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-gray-50"
-  >
-    <div class="min-h-screen">
-      <!-- Header -->
-      <header class="bg-white shadow-md">
-        <div class="container mx-auto px-6 py-4">
-          <div class="flex items-center justify-between">
-            <!-- Left side with logo and title -->
-            <div class="flex items-center space-x-4">
-              <img
-                src="assets/images/bcbs-logo.svg"
-                alt="BCBS Logo"
-                class="h-10 mr-2"
+<div class="min-h-screen bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow-lg">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <img
+          src="assets/images/bcbs-logo.png"
+          alt="BCBS Logo"
+          class="h-12 mr-4"
+        />
+        <h1 class="text-2xl font-bold text-blue-900">Member Portal</h1>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a
+          routerLink="/dashboard"
+          class="text-blue-900 hover:text-blue-700 font-medium"
+        >
+          Dashboard
+        </a>
+        <a
+          routerLink="/applications"
+          class="text-blue-900 hover:text-blue-700 font-medium"
+        >
+          Applications
+        </a>
+        <div class="relative">
+          <button
+            (click)="toggleDropdown()"
+            class="flex items-center text-gray-600 hover:text-blue-900"
+          >
+            <span class="mr-1">{{ user?.name }}</span>
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
               />
-              <h1 class="text-2xl font-bold text-blue-900">Member Portal</h1>
-            </div>
-
-            <!-- Right side with navigation -->
-            <nav class="flex items-center space-x-8">
-              <a
-                routerLink="/dashboard"
-                class="text-blue-900 hover:text-blue-700 font-medium"
-              >
-                Dashboard
-              </a>
-              <a
-                routerLink="/applications"
-                class="text-blue-900 hover:text-blue-700 font-medium"
-              >
-                Applications
-              </a>
-              <a
-                routerLink="/admin"
-                class="text-blue-900 hover:text-blue-700 font-medium bg-blue-50 px-4 py-2 rounded-md"
-              >
-                Admin
-              </a>
-
-              <!-- User Dropdown -->
-              <div class="relative" #userDropdown>
-                <button
-                  (click)="toggleDropdown()"
-                  class="flex items-center text-gray-600 hover:text-blue-900 space-x-2 focus:outline-none"
-                >
-                  <span class="font-medium">{{ user?.name || "Member" }}</span>
-                  <svg
-                    class="h-5 w-5 transition-transform duration-200"
-                    [class.rotate-180]="isDropdownOpen"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-
-                <!-- Dropdown Menu -->
-                <div
-                  *ngIf="isDropdownOpen"
-                  class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg py-2 z-50"
-                  (clickOutside)="closeDropdown()"
-                >
-                  <a
-                    routerLink="/profile"
-                    class="block px-4 py-2 text-gray-800 hover:bg-blue-50"
-                  >
-                    Edit Profile
-                  </a>
-                  <button
-                    (click)="logout()"
-                    class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-blue-50"
-                  >
-                    Sign Out
-                  </button>
-                </div>
-              </div>
-            </nav>
+            </svg>
+          </button>
+          <div
+            *ngIf="isDropdownOpen"
+            class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10"
+          >
+            <a
+              routerLink="/profile"
+              class="block px-4 py-2 text-gray-800 hover:bg-blue-50"
+            >
+              Edit Profile
+            </a>
+            <a
+              *ngIf="user?.isAdmin"
+              routerLink="/admin"
+              class="block px-4 py-2 text-gray-800 hover:bg-blue-50"
+            >
+              Admin Dashboard
+            </a>
+            <button
+              (click)="logout()"
+              class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-blue-50"
+            >
+              Sign Out
+            </button>
           </div>
         </div>
-      </header>
-
-      <!-- Main Content -->
-      <main class="container mx-auto px-4 py-6">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <!-- Sidebar -->
-          <div class="lg:col-span-1">
-            <div class="bg-white rounded-lg shadow-md p-5 sticky top-6">
-              <h2 class="text-lg font-bold text-blue-900 mb-4">
-                Admin Controls
-              </h2>
-              <div class="space-y-1">
-                <button
-                  (click)="selectSection('users')"
-                  class="w-full text-left p-2 rounded-md"
-                  [ngClass]="{
-                    'bg-blue-50 text-blue-900 font-medium':
-                      selectedSection === 'users',
-                    'hover:bg-gray-50 text-gray-700':
-                      selectedSection !== 'users'
-                  }"
-                >
-                  User Management
-                </button>
-                <button
-                  (click)="selectSection('org')"
-                  class="w-full text-left p-2 rounded-md"
-                  [ngClass]="{
-                    'bg-blue-50 text-blue-900 font-medium':
-                      selectedSection === 'org',
-                    'hover:bg-gray-50 text-gray-700': selectedSection !== 'org'
-                  }"
-                >
-                  Organization Settings
-                </button>
-                <button
-                  (click)="selectSection('permissions')"
-                  class="w-full text-left p-2 rounded-md"
-                  [ngClass]="{
-                    'bg-blue-50 text-blue-900 font-medium':
-                      selectedSection === 'permissions',
-                    'hover:bg-gray-50 text-gray-700':
-                      selectedSection !== 'permissions'
-                  }"
-                >
-                  Permissions
-                </button>
-                <button
-                  (click)="selectSection('audit')"
-                  class="w-full text-left p-2 rounded-md"
-                  [ngClass]="{
-                    'bg-blue-50 text-blue-900 font-medium':
-                      selectedSection === 'audit',
-                    'hover:bg-gray-50 text-gray-700':
-                      selectedSection !== 'audit'
-                  }"
-                >
-                  Audit Logs
-                </button>
-              </div>
-
-              <div class="mt-6">
-                <h3 class="font-medium text-blue-900 mb-2 text-sm">
-                  Admin Resources
-                </h3>
-                <div class="text-sm text-gray-600 space-y-1">
-                  <p>Need help managing your organization?</p>
-                  <a href="#" class="text-blue-900 hover:underline"
-                    >View Admin Guide</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Main Content Area -->
-          <div class="lg:col-span-3">
-            <!-- User Management Section -->
-            <div
-              class="bg-white rounded-lg shadow-md"
-              *ngIf="selectedSection === 'users'"
-            >
-              <div class="border-b p-5">
-                <h2 class="text-xl font-bold text-blue-900">User Management</h2>
-                <p class="text-gray-600 text-sm mt-1">
-                  Manage users in your organization
-                </p>
-              </div>
-
-              <div class="p-5">
-                <div class="user-management-container">
-                  <user-management
-                    tenant="tenant-id"
-                    widgetId="user-management-widget"
-                  ></user-management>
-                </div>
-              </div>
-            </div>
-
-            <!-- Role Management Section -->
-            <div
-              class="bg-white rounded-lg shadow-md"
-              *ngIf="selectedSection === 'permissions'"
-            >
-              <div class="border-b p-5">
-                <h2 class="text-xl font-bold text-blue-900">Role Management</h2>
-                <p class="text-gray-600 text-sm mt-1">
-                  Manage roles and permissions in your organization
-                </p>
-              </div>
-
-              <div class="p-5">
-                <div class="role-management-container">
-                  <role-management
-                    tenant="tenant-id"
-                    widgetId="role-management-widget"
-                  ></role-management>
-                </div>
-              </div>
-            </div>
-
-            <!-- Audit Logs Section -->
-            <div
-              class="bg-white rounded-lg shadow-md"
-              *ngIf="selectedSection === 'audit'"
-            >
-              <div class="border-b p-5">
-                <h2 class="text-xl font-bold text-blue-900">Audit Logs</h2>
-                <p class="text-gray-600 text-sm mt-1">
-                  View and manage audit logs for your organization
-                </p>
-              </div>
-
-              <div class="p-5">
-                <div class="audit-management-container">
-                  <audit-management
-                    widgetId="audit-management-widget"
-                  ></audit-management>
-                </div>
-              </div>
-            </div>
-
-            <!-- Organization Settings Section -->
-            <div
-              class="bg-white rounded-lg shadow-md"
-              *ngIf="selectedSection === 'org'"
-            >
-              <div class="border-b p-5">
-                <h2 class="text-xl font-bold text-blue-900">
-                  Organization Settings
-                </h2>
-                <p class="text-gray-600 text-sm mt-1">
-                  Manage your organization's settings and preferences
-                </p>
-              </div>
-
-              <div class="p-5">
-                <p class="text-gray-600">
-                  Organization settings will be available soon.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+      </div>
     </div>
-  </body>
-</html>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <!-- Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h2 class="text-xl font-bold text-blue-900 mb-4">Admin Controls</h2>
+          <div class="space-y-2">
+            <a
+              href="#"
+              class="block p-2 rounded-lg bg-blue-50 text-blue-900 font-medium"
+            >
+              User Management
+            </a>
+            <a
+              href="#"
+              class="block p-2 rounded-lg hover:bg-gray-100 text-gray-700"
+            >
+              Organization Settings
+            </a>
+            <a
+              href="#"
+              class="block p-2 rounded-lg hover:bg-gray-100 text-gray-700"
+            >
+              Permissions
+            </a>
+            <a
+              href="#"
+              class="block p-2 rounded-lg hover:bg-gray-100 text-gray-700"
+            >
+              Audit Logs
+            </a>
+          </div>
+
+          <div class="mt-8">
+            <h3 class="font-medium text-blue-900 mb-2">Admin Resources</h3>
+            <div class="text-sm text-gray-600 space-y-1">
+              <p>Need help managing your organization?</p>
+              <a href="#" class="text-blue-900 hover:underline"
+                >View Admin Guide</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="lg:col-span-3">
+        <div class="bg-white rounded-lg shadow-lg">
+          <div class="border-b p-6">
+            <h2 class="text-xl font-bold text-blue-900">User Management</h2>
+            <p class="text-gray-600 mt-1">Manage users in your organization</p>
+          </div>
+
+          <div class="p-6">
+            <!-- Descope User Management Widget -->
+            <user-management
+              tenant="tenant-id"
+              widgetId="user-management-widget"
+            ></user-management>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

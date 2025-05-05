@@ -13,18 +13,18 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.authService.user$.subscribe((descopeUser) => {
-			if (descopeUser.user) {
-				this.user = {
+      if (descopeUser.user) {
+        this.user = {
           name: descopeUser.user.name ?? '',
           email: descopeUser.user.email || 'test@descope.com',
           role: descopeUser.user.roleNames || 'No Role Set',
           picture: descopeUser.user.picture || '',
         };
-			} else {
+      } else {
         // If the user is logged out, clear the user details
         this.user = null;
         // Optionally, trigger One Tap or another login flow here
       }
-		});
+    });
   }
 }

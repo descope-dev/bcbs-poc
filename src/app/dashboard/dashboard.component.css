@@ -79,3 +79,52 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #002366;
 }
+
+/* Dropdown menu styles */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+/* Ensure dropdown is visible */
+.bg-white {
+  background-color: white !important;
+}
+
+/* Ensure dropdown items are visible */
+.block {
+  display: block !important;
+}
+
+/* Ensure dropdown has proper shadow */
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Ensure dropdown is not hidden */
+.hidden {
+  display: none !important;
+}
+
+/* Ensure dropdown menu is visible */
+.absolute.right-0 {
+  right: 0 !important;
+}
+
+/* Ensure dropdown menu items are visible */
+.block.px-4.py-2 {
+  padding: 0.5rem 1rem !important;
+}
+
+/* Ensure dropdown menu items have proper hover effect */
+.hover\:bg-blue-50:hover {
+  background-color: #f0f7ff !important;
+}
