@@ -23,6 +23,13 @@
         >
           Applications
         </a>
+        <a
+          *ngIf="user?.isAdmin"
+          routerLink="/admin"
+          class="text-blue-900 hover:text-blue-700 font-medium"
+        >
+          Admin
+        </a>
         <span class="text-gray-600">{{ user?.name }}</span>
         <button
           class="bg-blue-900 text-white hover:bg-blue-800 font-bold py-2 px-4 rounded"

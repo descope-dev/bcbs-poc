@@ -17,6 +17,13 @@
         >
           Dashboard
         </a>
+        <a
+          *ngIf="user?.isAdmin"
+          routerLink="/admin"
+          class="text-blue-900 hover:text-blue-700 font-medium"
+        >
+          Admin
+        </a>
         <div class="relative">
           <button
             (click)="toggleDropdown()"
