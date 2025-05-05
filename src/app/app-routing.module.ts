@@ -6,9 +6,12 @@ import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { descopeAuthGuard } from '@descope/angular-sdk';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './register/register.component';
+import { PromiseHomeComponent } from './promise-home/promise-home.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -27,6 +30,7 @@ const routes: Routes = [
     canActivate: [descopeAuthGuard],
     data: { descopeFallbackUrl: '/login' },
   },
+  { path: 'promise', component: PromiseHomeComponent },
   { path: '', component: HomeComponent, pathMatch: 'full' },
 ];
 

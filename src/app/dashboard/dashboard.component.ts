@@ -13,24 +13,11 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    // Initialize with a default user object for the demo
-    this.user = {
-      name: 'BCBS Member',
-      email: 'member@bcbs.com',
-      isAdmin: true, // For demo purposes, all users are admins
-      memberId: '123456789',
-      phone: '(555) 123-4567',
-    };
-
     this.authService
       .getUserData()
       .then((user) => {
         if (user) {
-          // Keep the isAdmin property as true for demonstration
-          this.user = {
-            ...user,
-            isAdmin: true,
-          };
+          this.user = user;
         }
       })
       .catch((error) => {

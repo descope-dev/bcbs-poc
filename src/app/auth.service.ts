@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { DescopeAuthService } from '@descope/angular-sdk';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 declare var Descope: any;
 
@@ -19,103 +20,55 @@ export interface User {
   providedIn: 'root',
 })
 export class AuthService {
-  sdk: any;
-
-  constructor(private router: Router) {
-    this.sdk = new DescopeAuthService({
-      projectId: environment.descopeProjectId,
-    });
-  }
+  constructor(
+    private descopeAuthService: DescopeAuthService,
+    private router: Router
+  ) {}
 
   async getUserData(): Promise<User> {
     try {
-      const sessionToken = this.sdk.getSessionToken();
-      console.log('Session token exists:', !!sessionToken);
+      // Get the current user from the Descope SDK
+      const descopeUser = await firstValueFrom(this.descopeAuthService.user$);
 
-      // DEMO APP: For this demo, we're going to set all users as admin
-      // In a real app, this would be based on actual roles from Descope
-      const isDemoAdmin = true;
+      if (descopeUser && descopeUser.user) {
+        console.log('User data from Descope:', descopeUser.user);
 
-      if (sessionToken && !this.sdk.isJwtExpired(sessionToken)) {
-        try {
-          const profile = await this.sdk.me(this.sdk.getRefreshToken());
-          console.log('User profile from SDK:', profile);
+        // Check if user has admin role
+        const hasAdminRole = this.hasAdminRole(descopeUser.user);
 
-          // In a real application, we'd check the actual role
-          // For demo purposes, all users can access admin features
-          const hasAdminRole =
-            isDemoAdmin ||
-            (profile.data.roleNames &&
-              profile.data.roleNames.includes('admin')) ||
-            profile.data.role === 'admin';
-
-          const user: User = {
-            name: profile.data.name || 'No Name Set',
-            email: profile.userEmail || 'test@descope.com',
-            role: profile.data.role || 'Admin',
-            picture: profile.data.picture || '',
-            isAdmin: hasAdminRole, // Always true for demo
-            memberId: profile.data.memberId || '123456789',
-            phone: profile.data.phone || '(555) 123-4567',
-          };
-          return user;
-        } catch (error) {
-          console.warn(
-            'Error fetching profile, returning demo admin user',
-            error
-          );
-          return this.getDemoAdminUser();
-        }
+        return {
+          name: descopeUser.user.name || 'No Name Set',
+          email: descopeUser.user.email || '',
+          role: Array.isArray(descopeUser.user.roleNames)
+            ? descopeUser.user.roleNames[0]
+            : 'User',
+          picture: descopeUser.user.picture || '',
+          isAdmin: hasAdminRole,
+          memberId:
+            descopeUser.user.customAttributes?.['memberId'] ||
+            descopeUser.user.userId?.substring(0, 8) ||
+            '',
+          phone: descopeUser.user.phone || '',
+        };
       } else {
-        // Token is expired or doesn't exist, try to refresh
-        try {
-          await this.sdk.refresh(this.sdk.getRefreshToken());
-          const profile = await this.sdk.me(this.sdk.getRefreshToken());
-
-          const hasAdminRole =
-            isDemoAdmin ||
-            (profile.data.roleNames &&
-              profile.data.roleNames.includes('admin')) ||
-            profile.data.role === 'admin';
-
-          const user: User = {
-            name: profile.data.name || 'No Name Set',
-            email: profile.userEmail || 'test@descope.com',
-            role: profile.data.role || 'Admin',
-            picture: profile.data.picture || '',
-            isAdmin: hasAdminRole, // Always true for demo
-            memberId: profile.data.memberId || '123456789',
-            phone: profile.data.phone || '(555) 123-4567',
-          };
-          return user;
-        } catch (error) {
-          console.warn(
-            'Session refresh failed, returning demo admin user',
-            error
-          );
-          return this.getDemoAdminUser();
-        }
+        console.warn('No user data available from Descope, using fallback');
+        return this.getDefaultUser();
       }
-    } catch (err) {
-      console.error('getUserData error:', err);
-      return this.getDemoAdminUser();
+    } catch (error) {
+      console.error('Error getting user data:', error);
+      return this.getDefaultUser();
     }
   }
 
-  // Provide default user data for the demo - with admin access
-  private getDemoAdminUser(): User {
-    return {
-      name: 'BCBS Admin',
-      email: 'admin@bcbs.com',
-      role: 'Admin',
-      picture: '',
-      isAdmin: true, // Always true for demo
-      memberId: 'ADMIN123',
-      phone: '(555) 123-4567',
-    };
+  private hasAdminRole(user: any): boolean {
+    // Check if user has admin role from Descope
+    if (user.roleNames && Array.isArray(user.roleNames)) {
+      return user.roleNames.includes('admin');
+    }
+    return false;
   }
 
-  // Standard member user (not used in demo, but kept for reference)
+  // Fallback user data
   private getDefaultUser(): User {
     return {
       name: 'BCBS Member',
@@ -130,9 +83,12 @@ export class AuthService {
 
   async validateSession(): Promise<any> {
     try {
-      await this.sdk.refresh();
-      const sessionToken = this.sdk.getSessionToken();
-      if (sessionToken && !this.sdk.isJwtExpired(sessionToken)) {
+      await this.descopeAuthService.descopeSdk.refresh();
+      const sessionToken = this.descopeAuthService.getSessionToken();
+      if (
+        sessionToken &&
+        !this.descopeAuthService.descopeSdk.isJwtExpired(sessionToken)
+      ) {
         return "You're logged in!";
       } else {
         console.warn('Session validation failed but not redirecting');
@@ -146,12 +102,13 @@ export class AuthService {
 
   async logout(): Promise<void> {
     try {
-      await this.sdk.logout(this.sdk.getRefreshToken());
-      this.router.navigate(['/']);
+      // Use the Descope SDK for logout
+      await this.descopeAuthService.descopeSdk.logout();
+      this.router.navigate(['/login']);
     } catch (error) {
       console.error('Logout error:', error);
       // Force navigation even if logout failed
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     }
   }
 }

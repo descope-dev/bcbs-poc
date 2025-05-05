@@ -1,0 +1,30 @@
+descope-wc {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Highlight section styling */
+.highlight-section {
+  background-color: #f0f7ff;
+  border-left: 4px solid #003087;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-family: var(--font-fieldwork);
+}
+
+/* Ensure button visibility */
+button {
+  opacity: 1 !important;
+  visibility: visible !important;
+  background-color: #003087 !important;
+  color: white !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.375rem !important;
+  font-weight: 500 !important;
+  transition: background-color 0.2s !important;
+}
+
+button:hover {
+  background-color: #002366 !important;
+}

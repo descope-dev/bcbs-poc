@@ -1,0 +1,49 @@
+body,
+.font-sans {
+  font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+header {
+  border-bottom: 2px solid #f3c1d6;
+}
+
+nav a,
+nav button {
+  transition: color 0.2s, background 0.2s;
+}
+
+.bg-[#b8325b] {
+  background-color: #b8325b !important;
+}
+
+.text-[#b8325b] {
+  color: #b8325b !important;
+}
+
+.hover\:bg-[#a0264a]:hover {
+  background-color: #a0264a !important;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+.shadow {
+  box-shadow: 0 2px 8px 0 rgba(184, 50, 91, 0.08);
+}
+
+.rounded {
+  border-radius: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

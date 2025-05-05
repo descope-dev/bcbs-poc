@@ -36,3 +36,35 @@ button:hover {
   margin: 1rem 0;
   font-family: var(--font-fieldwork);
 }
+
+/* Promise theme overrides */
+.promise-theme h1,
+.promise-theme h2,
+.promise-theme .text-blue-900,
+.promise-theme .hover\:text-blue-700:hover,
+.promise-theme .text-[#0071bc],
+.promise-theme .hover\:text-[#005a94]:hover {
+  color: #b8325b !important;
+}
+
+.promise-theme .bg-[#0071bc],
+.promise-theme .hover\:bg-[#005a94]:hover,
+.promise-theme .bg-blue-900,
+.promise-theme .hover\:bg-blue-800:hover,
+.promise-theme .bg-white .text-blue-900 {
+  background-color: #b8325b !important;
+  color: #fff !important;
+}
+
+.promise-theme a,
+.promise-theme a:hover {
+  color: #b8325b !important;
+}
+
+.promise-theme .border-blue-900 {
+  border-color: #b8325b !important;
+}
+
+.promise-theme .highlight-section {
+  border-left: 4px solid #b8325b !important;
+}

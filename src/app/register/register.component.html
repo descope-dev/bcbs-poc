@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Blue Shield of California - Member Registration</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+  </head>
+
+  <body
+    class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-white"
+  >
+    <div class="min-h-screen">
+      <!-- Header -->
+      <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <img
+                src="assets/images/bcbs-logo.svg"
+                alt="Blue Shield of California Logo"
+                class="h-8 mr-4"
+              />
+              <a href="/" class="text-blue-900 hover:text-blue-700 font-medium">
+                Blue Shield of California home
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="container mx-auto px-4 py-12">
+        <div class="max-w-2xl mx-auto">
+          <h1 class="text-3xl font-bold text-center text-blue-900 mb-8">
+            Register for Member Portal Access
+          </h1>
+
+          <div class="bg-white p-8 rounded-lg border border-gray-200">
+            <div class="highlight-section mb-6">
+              <p class="text-gray-600 mb-4">
+                To register, you'll need either your:
+              </p>
+              <ul class="list-disc list-inside text-gray-600">
+                <li>Member ID (especially for Blue Shield Medicare members)</li>
+                <li>Social security number (SSN)</li>
+              </ul>
+            </div>
+
+            <!-- Descope Registration -->
+            <div class="mb-6">
+              <descope
+                flowId="sign-up"
+                (success)="onRegisterSuccess()"
+                (error)="onError($event)"
+              ></descope>
+            </div>
+
+            <div class="text-center mt-6">
+              <p class="text-gray-600">
+                Already have an account?
+                <a
+                  routerLink="/login"
+                  class="text-blue-900 hover:text-blue-700 font-medium"
+                >
+                  Sign in here
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

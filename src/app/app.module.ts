@@ -28,6 +28,14 @@ import { ApplicationsComponent } from './applications/applications.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthService } from './auth.service';
+import { RegisterComponent } from './register/register.component';
+import { PromiseHomeComponent } from './promise-home/promise-home.component';
+
+// Register Descope web components
+import '@descope/web-component';
+// If there are specific imports for role and audit management, add them here
+// import '@descope/web-component/role-management';
+// import '@descope/web-component/audit-management';
 
 export function initializeApp(authService: DescopeAuthService) {
   return () => zip([authService.refreshSession(), authService.refreshUser()]);
@@ -51,6 +59,8 @@ const routes: Routes = [
     ApplicationsComponent,
     ProfileComponent,
     AdminComponent,
+    RegisterComponent,
+    PromiseHomeComponent,
   ],
   imports: [
     BrowserModule,
