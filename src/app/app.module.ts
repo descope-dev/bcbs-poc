@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { GoogleChartsModule } from 'angular-google-charts';
 import {
   DescopeAuthModule,
   DescopeAuthService,
@@ -57,7 +56,6 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    GoogleChartsModule,
     DescopeAuthModule.forRoot({
       projectId: environment.descopeProjectId,
     }),
