@@ -3,5 +3,5 @@
 
 export const environment = {
   production: false,
-  descopeProjectId: 'P2OkfVnJi5Ht7mpCqHjx17nV5epH', // Replace with your actual Descope project ID
+  descopeProjectId: 'P2wYXQtnF15FzW2WnDrdu65ZbW7F', // Replace with your actual Descope project ID
 };
